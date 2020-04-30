@@ -14,6 +14,7 @@
 #include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_ILI9341.h>
+//#include "Fonts/FreeMono9.h"
 #include "Fonts/FreeMono9pt7b.h"
 #include "Fonts/FreeMonoBold12pt7b.h"
 // Объект для обнавления с web страницы

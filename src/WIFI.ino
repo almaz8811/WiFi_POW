@@ -44,12 +44,13 @@ void WIFIinit()
     display.startWrite();
    display.setFont(&FreeMono9pt7b);                           // устанавливаем маленький шрифт
    display.setTextColor(ILI9341_WHITE);
-sprintf(s,"AP: %s", jsonRead(configSetup, "SSDP").c_str());
+//sprintf(s,"AP: %s", jsonRead(configSetup, "ssidAP").c_str());
       display.setCursor(10,32);
-      display.print(s);
-      sprintf(s,"http://192.168.4.1"); 
-      display.setCursor(10,48);
-      display.print(s);
+      display.print(String("Сеть AP: ") + String("192.168.4.1"));
+      //display.print(s);
+      //sprintf(s,"http://192.168.4.1"); 
+      //display.setCursor(10,48);
+      //display.print(s);
    display.endWrite();
   }
   else
@@ -62,15 +63,16 @@ sprintf(s,"AP: %s", jsonRead(configSetup, "SSDP").c_str());
     Serial.println(WiFi.localIP());
     // Выводим на дисплей
     display.startWrite();
+    //display.setFont(&FreeMono9pt7b); // устанавливаем маленький шрифт
     display.setFont(&FreeMono9pt7b); // устанавливаем маленький шрифт
     display.setTextColor(ILI9341_WHITE);
-    sprintf(s,"Connect: %s", jsonRead(configSetup, "SSDP").c_str());
+    //sprintf(s,"Connect: %s", jsonRead(configSetup, "SSDP").c_str());
     display.setCursor(10,32);
-    display.print(s);
     IPAddress my_ip = WiFi.localIP();
-      sprintf(s,"http://%d.%d.%d.%d",my_ip[0],my_ip[1],my_ip[2],my_ip[3]); 
-      display.setCursor(10,48);
-      display.print(s);
+    display.print(String("Сеть WIFI: ") + String(my_ip[0]) + "." + String(my_ip[1]) + "." + String(my_ip[2]) + "." + String(my_ip[3]));
+//      sprintf(s,"http://%d.%d.%d.%d",my_ip[0],my_ip[1],my_ip[2],my_ip[3]); 
+//      display.setCursor(10,48);
+//      display.print(s);
     display.endWrite();
   }
 }
