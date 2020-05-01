@@ -22,7 +22,7 @@ void setup()
   display.setTextColor(ILI9341_YELLOW);
   display.setFont(&FreeMonoBold12pt7b);
   display.setCursor(10, 16);
-  display.print("AlmazPoWer v1.2");
+  display.print("AlmazPoWer v1.0");
   display.endWrite();
   //Запускаем WIFI
   WIFIinit();
