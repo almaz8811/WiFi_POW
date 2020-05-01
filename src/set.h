@@ -14,7 +14,7 @@
 #include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_ILI9341.h>
-//#include "Fonts/FreeMono9.h"
+#include <Adafruit_STMPE610.h>
 #include "Fonts/FreeMono9pt7b.h"
 #include "Fonts/FreeMonoBold12pt7b.h"
 // Объект для обнавления с web страницы
@@ -30,7 +30,7 @@ File fsUploadFile;
 DNSServer dnsServer;
 
 //Планировщик задач (Число задач)
-TickerScheduler ts(2);
+TickerScheduler ts(3);
 
 // Датчик DHT
 DHT dht;

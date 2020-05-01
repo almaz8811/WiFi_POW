@@ -40,6 +40,18 @@ void sec_init() {
  *  Процедуру blink_init() инициализируйте в setup
  */
 
-void blink_init() {
-  // здесь пишите код решения
+void disp_time() {
+    ts.add(2, 60000, [&](void*) { // Запустим задачу 1 с интервалом 1000ms
+    // поместим данные для web страницы в json строку configJson
+    // Будем вызывать эту функцию каждый раз при запросе /config.live.json
+    // jsonWrite(строка, "ключ", значение_число); Так можно дабавить или обнавить json значение ключа в строке
+    // jsonWrite(строка, "ключ", "значение_текст");  
+    display.startWrite();
+    display.setFont(&FreeMonoBold12pt7b);
+   display.setTextColor(ILI9341_GREEN);
+    display.fillRect(240, 0, 80, 20,   ILI9341_BLACK);
+      display.setCursor(240, 16);
+      display.print(GetTimeHM());
+      display.endWrite();
+    }, nullptr, true);  
   }

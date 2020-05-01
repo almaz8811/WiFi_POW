@@ -22,7 +22,7 @@ void setup()
   display.setTextColor(ILI9341_YELLOW);
   display.setFont(&FreeMonoBold12pt7b);
   display.setCursor(10, 16);
-  display.print("PowerMeter v1.1");
+  display.print("AlmazPoWer v1.2");
   display.endWrite();
   //Запускаем WIFI
   WIFIinit();
@@ -30,6 +30,7 @@ void setup()
   // Получаем время из сети
   Time_init();
   sec_init();
+  disp_time();
   //Настраиваем и запускаем SSDP интерфейс
   Serial.println("Start 3-SSDP");
   SSDP_init();
