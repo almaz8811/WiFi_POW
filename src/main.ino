@@ -204,6 +204,7 @@ String graf(int datas, int datas1, int datas2)
 void displayEE()
 {
   display.startWrite();
+ 
   display.fillRect(0, 38, 320, 60, ILI9341_BLACK);
   display.drawRect(0, 38, 159, 20, ILI9341_WHITE);
   display.drawRect(160, 38, 159, 20, ILI9341_WHITE);
@@ -212,22 +213,23 @@ void displayEE()
   display.drawRect(0, 78, 159, 20, ILI9341_WHITE);
   display.drawRect(160, 78, 159, 20, ILI9341_WHITE);
 
-  display.setFont(&FreeMonoBold12pt7b);
+  
+  display.setFont(&FreeMonoBold7pt8b);
   display.setTextColor(ILI9341_GREEN);
 
-  sprintf(s, "%d.%02d V", (int)u1, ((int)(u1 * 100)) % 100);
+  sprintf(s, "%d.%02d Вольт", (int)u1, ((int)(u1 * 100)) % 100);
   display.setCursor(2, 55);
   display.print(s);
 
-  sprintf(s, "%d.%02d A", (int)i1, ((int)(i1 * 100)) % 100);
+  sprintf(s, "%d.%02d Ампер", (int)i1, ((int)(i1 * 100)) % 100);
   display.setCursor(162, 55);
   display.print(s);
 
-  sprintf(s, "%d.%02d W", (int)p1, ((int)(p1 * 100)) % 100);
+  sprintf(s, "%d.%02d Ватт", (int)p1, ((int)(p1 * 100)) % 100);
   display.setCursor(2, 75);
   display.print(s);
 
-  sprintf(s, "%d.%02d Wh", (int)e1, ((int)(e1 * 100)) % 100);
+  sprintf(s, "%d.%02d Ватт/ч", (int)e1, ((int)(e1 * 100)) % 100);
   display.setCursor(162, 75);
   display.print(s);
   display.endWrite();
@@ -254,7 +256,7 @@ void displayGRAPH()
   int n = 0;
   sprintf(s, "Pmax=%d.%02d Pmin=%d.%02d", (int)p_max, ((int)(p_max * 100)) % 100, (int)p_min, ((int)(p_min * 100)) % 100);
   // Пишем минимум максимум
-  display.setFont(&FreeMono9pt7b); // устанавливаем маленький шрифт
+  display.setFont(&FreeMono9pt8b); // устанавливаем маленький шрифт
   display.setTextColor(ILI9341_RED);
   display.setCursor(30, 135);
   display.print(s);

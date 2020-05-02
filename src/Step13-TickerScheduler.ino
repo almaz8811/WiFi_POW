@@ -20,8 +20,8 @@ void setup()
   display.fillScreen(ILI9341_BLACK);
   display.startWrite();
   display.setTextColor(ILI9341_YELLOW);
-  display.setFont(&FreeMonoBold12pt7b);
-  display.setCursor(10, 16);
+  display.setFont(&FreeMono7pt8b);
+  display.setCursor(5, 10);
   display.print("AlmazPoWer v1.0");
   display.endWrite();
   //Запускаем WIFI

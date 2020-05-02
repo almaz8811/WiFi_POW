@@ -15,8 +15,10 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_ILI9341.h>
 #include <Adafruit_STMPE610.h>
-#include "Fonts/FreeMono9pt7b.h"
-#include "Fonts/FreeMonoBold12pt7b.h"
+#include "Fonts/FreeMono7pt8b.h"
+#include "Fonts/FreeMono9pt8b.h"
+#include "Fonts/FreeMonoBold7pt8b.h"
+
 // Объект для обнавления с web страницы
 ESP8266HTTPUpdateServer httpUpdater;
 

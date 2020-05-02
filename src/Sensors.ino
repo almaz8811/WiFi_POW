@@ -56,13 +56,13 @@ void disp_time()
         // jsonWrite(строка, "ключ", значение_число); Так можно дабавить или обнавить json значение ключа в строке
         // jsonWrite(строка, "ключ", "значение_текст");
         display.startWrite();
-        display.setFont(&FreeMonoBold12pt7b);
+        display.setFont(&FreeMono7pt8b);
         display.setTextColor(ILI9341_GREEN);
-        display.fillRect(240, 0, 80, 20, ILI9341_BLACK);
-        display.setCursor(240, 16);
+        display.fillRect(275, 0, 45, 15, ILI9341_BLACK);
+        display.setCursor(275, 10);
         display.print(GetTimeHM());
         display.endWrite();
-                  displayEE();
+        displayEE();
       },
       nullptr, true);
 }
