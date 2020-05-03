@@ -2,18 +2,17 @@
 
 void setup()
 {
-
   Serial.begin(115200);
   delay(5);
-  Serial.println("");
+  //Serial.println("");
   //Запускаем файловую систему
-  Serial.println("Start 4-FS");
+  //Serial.println("Start 4-FS");
   FS_init();
-  Serial.println("Step7-FileConfig");
+  //Serial.println("Step7-FileConfig");
   configSetup = readFile("config.json", 4096);
   jsonWrite(configJson, "SSDP", jsonRead(configSetup, "SSDP"));
-  Serial.println(configSetup);
-  Serial.println("Start 1-WIFI");
+  //Serial.println(configSetup);
+  //Serial.println("Start 1-WIFI");
 
   display.begin();
   display.setRotation(1);
@@ -26,16 +25,16 @@ void setup()
   display.endWrite();
   //Запускаем WIFI
   WIFIinit();
-  Serial.println("Start 8-Time");
+  //Serial.println("Start 8-Time");
   // Получаем время из сети
   Time_init();
   sec_init();
   disp_time();
   //Настраиваем и запускаем SSDP интерфейс
-  Serial.println("Start 3-SSDP");
+  //Serial.println("Start 3-SSDP");
   SSDP_init();
   //Настраиваем и запускаем HTTP интерфейс
-  Serial.println("Start 2-WebServer");
+  //Serial.println("Start 2-WebServer");
   HTTP_init();
   DHT_init();
 }

@@ -203,35 +203,45 @@ String graf(int datas, int datas1, int datas2)
 
 void displayEE()
 {
-  display.startWrite();
- 
-  display.fillRect(0, 38, 320, 60, ILI9341_BLACK);
-  display.drawRect(0, 38, 159, 20, ILI9341_WHITE);
-  display.drawRect(160, 38, 159, 20, ILI9341_WHITE);
-  display.drawRect(0, 58, 159, 20, ILI9341_WHITE);
-  display.drawRect(160, 58, 159, 20, ILI9341_WHITE);
-  display.drawRect(0, 78, 159, 20, ILI9341_WHITE);
-  display.drawRect(160, 78, 159, 20, ILI9341_WHITE);
-
+  display.startWrite(); 
+  display.fillRect(0, 27, 320, 80, ILI9341_BLACK);
+  display.drawRect(0, 27, 159, 20, ILI9341_WHITE);
+  display.drawRect(160, 27, 159, 20, ILI9341_WHITE);
+  display.drawRect(0, 47, 159, 20, ILI9341_WHITE);
+  display.drawRect(160, 47, 159, 20, ILI9341_WHITE);
+  display.drawRect(0, 67, 159, 20, ILI9341_WHITE);
+  display.drawRect(160, 67, 159, 20, ILI9341_WHITE);
   
-  display.setFont(&FreeMonoBold7pt8b);
   display.setTextColor(ILI9341_GREEN);
 
-  sprintf(s, "%d.%02d Вольт", (int)u1, ((int)(u1 * 100)) % 100);
-  display.setCursor(2, 55);
+  display.setFont(&FreeMonoBold12pt8b);
+  sprintf(s, "%d.%02d", (int)u1, ((int)(u1 * 100)) % 100);
+  display.setCursor(2, 44);
   display.print(s);
+  display.setFont(&FreeMono7pt8b);
+  display.print(" В");
+  
+  display.setFont(&FreeMonoBold12pt8b);
+  sprintf(s, "%d.%02d", (int)i1, ((int)(i1 * 100)) % 100);
+  display.setCursor(162, 44);
+  display.print(s);
+  display.setFont(&FreeMono7pt8b);
+  display.print(" А");
 
-  sprintf(s, "%d.%02d Ампер", (int)i1, ((int)(i1 * 100)) % 100);
-  display.setCursor(162, 55);
+  display.setFont(&FreeMonoBold12pt8b);
+  sprintf(s, "%d.%02d", (int)p1, ((int)(p1 * 100)) % 100);
+  display.setCursor(2, 64);
   display.print(s);
+  display.setFont(&FreeMono7pt8b);
+  display.print(" Вт");
 
-  sprintf(s, "%d.%02d Ватт", (int)p1, ((int)(p1 * 100)) % 100);
-  display.setCursor(2, 75);
+  display.setFont(&FreeMonoBold12pt8b);
+  sprintf(s, "%d.%02d", (int)e1, ((int)(e1 * 100)) % 100);
+  display.setCursor(162, 64);
   display.print(s);
+  display.setFont(&FreeMono7pt8b);
+  display.print(" Вт/ч");
 
-  sprintf(s, "%d.%02d Ватт/ч", (int)e1, ((int)(e1 * 100)) % 100);
-  display.setCursor(162, 75);
-  display.print(s);
   display.endWrite();
 }
 
