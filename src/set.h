@@ -2,12 +2,13 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266SSDP.h>
 #include <FS.h>
-#include <ArduinoJson.h>    // Установить из менеджера библиотек. Версия 5.13.0
+#include <ArduinoJson.h> // Установить из менеджера библиотек. Версия 5.13.0
 #include <ESP8266HTTPUpdateServer.h>
 #include <DNSServer.h>
-#include <TickerScheduler.h>    // https://github.com/Toshik/TickerScheduler
+#include <TickerScheduler.h> // https://github.com/Toshik/TickerScheduler
 // Библиотеки устройств
-#include <DHT.h>          // https://github.com/markruys/arduino-DHT
+#include <DHT.h> // https://github.com/markruys/arduino-DHT
+#include <PZEM004T.h>
 #include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_ILI9341.h>
@@ -28,6 +29,9 @@ DNSServer dnsServer;
 //Планировщик задач (Число задач)
 TickerScheduler ts(3);
 
+PZEM004T pzem(&Serial);
+IPAddress ip(192, 168, 1, 1);
+
 // Датчик DHT
 DHT dht;
 #define dhtPin 2
@@ -45,11 +49,14 @@ String configSetup = "{}"; // данные для config.setup.json
 String configJson = "{}";  // данные для config.live.json
 
 char s[100];
-float u1=0.0,i1=0.0,p1=0.0,e1=0.0;
-float p_max = 0, p_min = 99999999;
-float u_avg=0.0,i_avg=0.0,p_avg=0.0;
-int u_count=0,i_count=0,p_count=0;
-long t_correct = 0;
-uint32_t tm = 0;
+int u_count = 0, i_count = 0, p_count = 0;
 int m_page0[M_PAGE_SIZE];
 int m_page_count0 = 0;
+float u1 = 0.0, i1 = 0.0, p1 = 0.0, e1 = 0.0;
+float p_max = 0, p_min = 99999999;
+float u_avg = 0.0, i_avg = 0.0, p_avg = 0.0;
+long t_correct = 0;
+uint32_t tm = 0;
+uint32_t t_cur = 0;
+uint32_t ms, ms1 = 0, ms2 = 0, ms3 = 0, ms4 = 0, ms_ok = 0;
+uint32_t m_tm    = 10000;
