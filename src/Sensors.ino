@@ -17,7 +17,7 @@ void DHT_init()
     //jsonWrite(configJson, "humidity", dht.getHumidity());       // отправить влажность в configJson
 
     ts.add(
-        0, 500, [&](void *) {                                        // Запустим задачу 0 с интервалом test
+        0, 600, [&](void *) {                                        // Запустим задачу 0 с интервалом test
           //jsonWrite(configJson, "temperature", dht.getTemperature()); // отправить температуру в configJson
           //jsonWrite(configJson, "humidity", dht.getHumidity());       // отправить влажность в configJson
           //DebugSerial.println(pzem.voltage(ip));

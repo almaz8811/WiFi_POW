@@ -22,6 +22,16 @@ void setup()
   display.setFont(&FreeMono7pt8b);
   display.setCursor(5, 10);
   display.print("AlmazPoWer v1.0");
+  //display.fillRect(0, 27, 320, 80, ILI9341_YELLOW);  
+  display.drawRect(0, 27, 159, 20, ILI9341_WHITE);  
+  display.drawRect(160, 27, 159, 20, ILI9341_WHITE);  
+  display.drawRect(0, 47, 159, 20, ILI9341_WHITE);  
+  display.drawRect(160, 47, 159, 20, ILI9341_WHITE);
+  
+  display.drawRect(0, 67, 159, 20, ILI9341_WHITE);
+  display.fillRect(1, 68, 157, 18, ILI9341_YELLOW);
+  display.drawRect(160, 67, 159, 20, ILI9341_WHITE);
+  display.fillRect(161, 68, 157, 18, ILI9341_YELLOW);
   display.endWrite();
   //Запускаем WIFI
   WIFIinit();

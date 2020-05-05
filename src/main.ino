@@ -203,17 +203,9 @@ String graf(int datas, int datas1, int datas2)
 
 void displayEE()
 {
-  display.startWrite(); 
-  display.fillRect(0, 27, 320, 80, ILI9341_BLACK);
-  display.drawRect(0, 27, 159, 20, ILI9341_WHITE);
-  display.drawRect(160, 27, 159, 20, ILI9341_WHITE);
-  display.drawRect(0, 47, 159, 20, ILI9341_WHITE);
-  display.drawRect(160, 47, 159, 20, ILI9341_WHITE);
-  display.drawRect(0, 67, 159, 20, ILI9341_WHITE);
-  display.drawRect(160, 67, 159, 20, ILI9341_WHITE);
-  
+  display.startWrite();
+  display.fillRect(1, 28, 157, 18, ILI9341_YELLOW);
   display.setTextColor(ILI9341_GREEN);
-
   display.setFont(&FreeMonoBold12pt8b);
   sprintf(s, "%d.%02d", (int)u1, ((int)(u1 * 100)) % 100);
   display.setCursor(2, 44);
@@ -221,6 +213,7 @@ void displayEE()
   display.setFont(&FreeMono7pt8b);
   display.print(" В");
   
+  display.fillRect(161, 28, 157, 18, ILI9341_YELLOW);
   display.setFont(&FreeMonoBold12pt8b);
   sprintf(s, "%d.%02d", (int)i1, ((int)(i1 * 100)) % 100);
   display.setCursor(162, 44);
@@ -228,6 +221,7 @@ void displayEE()
   display.setFont(&FreeMono7pt8b);
   display.print(" А");
 
+  display.fillRect(1, 48, 157, 18, ILI9341_YELLOW);
   display.setFont(&FreeMonoBold12pt8b);
   sprintf(s, "%d.%02d", (int)p1, ((int)(p1 * 100)) % 100);
   display.setCursor(2, 64);
@@ -235,6 +229,7 @@ void displayEE()
   display.setFont(&FreeMono7pt8b);
   display.print(" Вт");
 
+  display.fillRect(161, 48, 157, 18, ILI9341_YELLOW);
   display.setFont(&FreeMonoBold12pt8b);
   sprintf(s, "%d.%02d", (int)e1, ((int)(e1 * 100)) % 100);
   display.setCursor(162, 64);
