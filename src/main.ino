@@ -279,3 +279,60 @@ void displayGRAPH()
 
   display.endWrite();
 }
+
+void readEnergy(){
+  ms = millis();
+  if( ms1 == 0 || ms < ms1 || (ms - ms1)>500 ){
+       ms1    = ms;
+       t_cur  = ms/1000;
+       tm     = t_cur + t_correct;
+
+float u2,i2,p2,e2;
+       for( int i=0; i<3; i++ ){
+           u2 = pzem.voltage(ip);
+           if( u2 >= 0 ){u1 = u2; u_avg+=u1; u_count++; break; }
+       }
+       for( int i=0; i<3; i++ ){
+           i2 = pzem.current(ip);
+           if( i2 >= 0 ){i1 = i2; i_avg+=i1; i_count++; break; }
+       }
+       for( int i=0; i<3; i++ ){
+           p2 = pzem.power(ip);
+           if( p2 >= 0 ){p1 = p2; p_avg+=p1; p_count++; break; }
+       }
+       for( int i=0; i<3; i++ ){
+           e2 = pzem.energy(ip);
+           if( e2 >= 0 ){e1 = e2; break; }
+       }
+      
+       if( p_max < p1 )p_max = p1;
+       if( p_min > p1 )p_min = p1;       
+       
+
+   }
+
+   if( ms2 == 0 || ms < ms2 || (ms - ms2)>m_tm ){
+       ms2 = ms;
+    //WriteMFile(false);
+   }
+
+   if( ms4 == 0 || ms < ms4 || (ms - ms4)>2000 ){
+      ms4 = ms;
+      if( m_page_count0 >= M_PAGE_SIZE-1 ){
+        p_max = 0;p_min = 99999999;
+// Сдвигаем график        
+        for( int i=0; i<M_PAGE_SIZE-1; i++ ){
+             m_page0[i] = m_page0[i+1];
+             if( p_max < m_page0[i] )p_max = m_page0[i];
+             if( p_min > m_page0[i] )p_min = m_page0[i];
+        }
+        m_page0[M_PAGE_SIZE-1] = p1;
+        if( p_max < p1 )p_max = p1;
+        if( p_min > p1 )p_min = p1;
+      }
+      else {
+        m_page0[m_page_count0++] = p1;
+      }
+   }
+
+}

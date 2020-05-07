@@ -43,12 +43,15 @@ DHT dht;
 
 #define M_PAGE_SIZE 150
 
+#define NTP_TIMEOUT 600000 //10 минут
+
 Adafruit_ILI9341 display = Adafruit_ILI9341(PIN_CS, PIN_DC, PIN_RESET);
 
 String configSetup = "{}"; // данные для config.setup.json
 String configJson = "{}";  // данные для config.live.json
 
 char s[100];
+char m_file[16];
 int u_count = 0, i_count = 0, p_count = 0;
 int m_page0[M_PAGE_SIZE];
 int m_page_count0 = 0;
@@ -59,4 +62,5 @@ long t_correct = 0;
 uint32_t tm = 0;
 uint32_t t_cur = 0;
 uint32_t ms, ms1 = 0, ms2 = 0, ms3 = 0, ms4 = 0, ms_ok = 0;
-uint32_t m_tm    = 10000;
+uint32_t m_tm = 10000;
+uint16_t m_count = 0;

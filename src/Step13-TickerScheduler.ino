@@ -47,9 +47,9 @@ void setup()
   //Serial.println("Start 2-WebServer");
   HTTP_init();
     // Запуск модуля измерения ЭЭ
-  pzem.setAddress(ip);
-  DHT_init();
 
+  PZEM_init();
+  //DHT_init();
 }
 
 void loop()
@@ -58,23 +58,5 @@ void loop()
   HTTP.handleClient(); // Работа Web сервера
   yield();
   dnsServer.processNextRequest(); // Для работы DNS в режиме AP
-
-if( ms1 == 0 || ms < ms1 || (ms - ms1)>500 ){
-       ms1    = ms;
-       t_cur  = ms/1000;
-       tm     = t_cur + t_correct;
-
-      
-       if( p_max < p1 )p_max = p1;
-       if( p_min > p1 )p_min = p1;
-   
-       
-       
-
-   }
-
-   if( ms2 == 0 || ms < ms2 || (ms - ms2)>m_tm ){
-       ms2 = ms;
-    
-   }
+  readEnergy();
 }

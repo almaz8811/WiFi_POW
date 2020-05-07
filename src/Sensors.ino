@@ -1,4 +1,21 @@
-// -----------------  DHT
+// -----------------  PZEM
+void PZEM_init()
+{
+  pzem.setAddress(ip); //Запускаем датчик
+  delay(1000);
+  ts.add(
+      0, 1000, [&](void *) { // Запустим задачу 0 с интервалом test
+        jsonWrite(configJson, "voltage", u1); // отправить температуру в configJson
+        jsonWrite(configJson, "current", i1); // отправить температуру в configJson
+        jsonWrite(configJson, "power", p1); // отправить температуру в configJson
+        jsonWrite(configJson, "energy", e1); // отправить температуру в configJson
+        displayEE();
+        displayGRAPH();
+      },
+      nullptr, true);
+}
+
+/* // -----------------  DHT
 void DHT_init()
 {
   dht.setup(dhtPin);                                     //Запускаем датчик
@@ -17,33 +34,17 @@ void DHT_init()
     //jsonWrite(configJson, "humidity", dht.getHumidity());       // отправить влажность в configJson
 
     ts.add(
-        0, 700, [&](void *) {                                        // Запустим задачу 0 с интервалом test
+        0, 1000, [&](void *) {                                        // Запустим задачу 0 с интервалом test
           //jsonWrite(configJson, "temperature", dht.getTemperature()); // отправить температуру в configJson
           //jsonWrite(configJson, "humidity", dht.getHumidity());       // отправить влажность в configJson
           //DebugSerial.println(pzem.voltage(ip));
- float u2,i2,p2,e2;
-       for( int i=0; i<3; i++ ){
-           u2 = pzem.voltage(ip);
-           if( u2 >= 0 ){u1 = u2; u_avg+=u1; u_count++; break; }
-       }
-       for( int i=0; i<3; i++ ){
-           i2 = pzem.current(ip);
-           if( i2 >= 0 ){i1 = i2; i_avg+=i1; i_count++; break; }
-       }
-       for( int i=0; i<3; i++ ){
-           p2 = pzem.power(ip);
-           if( p2 >= 0 ){p1 = p2; p_avg+=p1; p_count++; break; }
-       }
-       for( int i=0; i<3; i++ ){
-           e2 = pzem.energy(ip);
-           if( e2 >= 0 ){e1 = e2; break; }
-       }
+ 
        displayEE();
        displayGRAPH();
         },
         nullptr, true);
   }
-}
+} */
 
 // -----------------  Вывод времени и даты в /config.live.json каждую секунду
 void sec_init()
@@ -71,9 +72,7 @@ void disp_time()
         display.setCursor(248, 17);
         display.print(GetTimeHM());
         display.endWrite();
-        
+
       },
       nullptr, true);
 }
-
-
