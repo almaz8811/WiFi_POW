@@ -204,38 +204,102 @@ String graf(int datas, int datas1, int datas2)
 void displayEE()
 {
   display.startWrite();
-  display.fillRect(1, 28, 157, 18, ILI9341_YELLOW);
+  display.fillRect(1, 28, 157, 14, ILI9341_BLACK);
   display.setTextColor(ILI9341_GREEN);
-  display.setFont(&FreeMonoBold12pt8b);
+  display.setFont(&FreeMonoBold9pt8b);
   sprintf(s, "%d.%02d", (int)u1, ((int)(u1 * 100)) % 100);
-  display.setCursor(2, 44);
+  display.setCursor(2, 40);
   display.print(s);
   display.setFont(&FreeMono7pt8b);
   display.print(" В");
   
-  display.fillRect(161, 28, 157, 18, ILI9341_YELLOW);
-  display.setFont(&FreeMonoBold12pt8b);
+  display.fillRect(161, 28, 157, 14, ILI9341_BLACK);
+  display.setFont(&FreeMonoBold9pt8b);
   sprintf(s, "%d.%02d", (int)i1, ((int)(i1 * 100)) % 100);
-  display.setCursor(162, 44);
+  display.setCursor(162, 40);
   display.print(s);
   display.setFont(&FreeMono7pt8b);
   display.print(" А");
 
-  display.fillRect(1, 48, 157, 18, ILI9341_YELLOW);
-  display.setFont(&FreeMonoBold12pt8b);
+  display.fillRect(1, 44, 157, 14, ILI9341_BLACK);
+  display.setFont(&FreeMonoBold9pt8b);
   sprintf(s, "%d.%02d", (int)p1, ((int)(p1 * 100)) % 100);
-  display.setCursor(2, 64);
+  display.setCursor(2, 56);
   display.print(s);
   display.setFont(&FreeMono7pt8b);
   display.print(" Вт");
 
-  display.fillRect(161, 48, 157, 18, ILI9341_YELLOW);
-  display.setFont(&FreeMonoBold12pt8b);
+  display.fillRect(161, 44, 157, 14, ILI9341_BLACK);
+  display.setFont(&FreeMonoBold9pt8b);
   sprintf(s, "%d.%02d", (int)e1, ((int)(e1 * 100)) % 100);
-  display.setCursor(162, 64);
+  display.setCursor(162, 56);
   display.print(s);
   display.setFont(&FreeMono7pt8b);
-  display.print(" Вт/ч");
+  display.print(" кВт/ч");
+
+  display.fillRect(1, 60, 157, 14, ILI9341_BLACK);
+  display.setFont(&FreeMonoBold9pt8b);
+  sprintf(s, "%d.%02d", (int)kWhDayAll, ((int)(kWhDayAll * 100)) % 100);
+  display.setCursor(2, 72);
+  display.print(s);
+  display.setFont(&FreeMono7pt8b);
+  display.print(" кВт/д");
+
+  display.fillRect(161, 60, 157, 14, ILI9341_BLACK);
+  display.setFont(&FreeMonoBold9pt8b);
+  sprintf(s, "%d.%02d", (int)e1, ((int)(e1 * 100)) % 100);
+  display.setCursor(162, 72);
+  display.print("999.00");
+  display.setFont(&FreeMono7pt8b);
+  display.print(" кВт/м");
+
+  display.fillRect(1, 76, 157, 14, ILI9341_BLACK);
+  display.setFont(&FreeMonoBold9pt8b);
+  sprintf(s, "%d.%02d", (int)p1, ((int)(p1 * 100)) % 100);
+  display.setCursor(2, 88);
+  display.print("9999.00");
+  display.setFont(&FreeMono7pt8b);
+  display.print(" цена/д");
+
+  display.fillRect(161, 76, 157, 14, ILI9341_BLACK);
+  display.setFont(&FreeMonoBold9pt8b);
+  sprintf(s, "%d.%02d", (int)e1, ((int)(e1 * 100)) % 100);
+  display.setCursor(162, 88);
+  display.print("9999.00");
+  display.setFont(&FreeMono7pt8b);
+  display.print(" цена/м");
+
+  display.fillRect(1, 92, 157, 14, ILI9341_BLACK);
+  display.setFont(&FreeMonoBold9pt8b);
+  sprintf(s, "%d.%02d", (int)p1, ((int)(p1 * 100)) % 100);
+  display.setCursor(2, 104);
+  display.print("9999.00");
+  display.setFont(&FreeMono7pt8b);
+  display.print(" В/min");
+
+  display.fillRect(161, 92, 157, 14, ILI9341_BLACK);
+  display.setFont(&FreeMonoBold9pt8b);
+  sprintf(s, "%d.%02d", (int)e1, ((int)(e1 * 100)) % 100);
+  display.setCursor(162, 104);
+  display.print("9999.00");
+  display.setFont(&FreeMono7pt8b);
+  display.print(" В/max");
+
+  display.fillRect(1, 108, 157, 14, ILI9341_BLACK);
+  display.setFont(&FreeMonoBold9pt8b);
+  sprintf(s, "%d.%02d", (int)p1, ((int)(p1 * 100)) % 100);
+  display.setCursor(2, 120);
+  display.print("9999.00");
+  display.setFont(&FreeMono7pt8b);
+  display.print(" Вт/min");
+
+  display.fillRect(161, 188, 157, 14, ILI9341_BLACK);
+  display.setFont(&FreeMonoBold9pt8b);
+  sprintf(s, "%d.%02d", (int)e1, ((int)(e1 * 100)) % 100);
+  display.setCursor(162, 120);
+  display.print("9999.00");
+  display.setFont(&FreeMono7pt8b);
+  display.print(" Вт/max");
 
   display.endWrite();
 }
@@ -244,7 +308,7 @@ void displayGRAPH()
 {
   // Стираем область графика
   display.startWrite();
-  display.fillRect(0, 120, 320, 120, ILI9341_WHITE);
+  display.fillRect(0, 140, 320, 120, ILI9341_WHITE);
 
   // Рисуем сетку
   for (int i = 0; i < 15; i++)
@@ -334,5 +398,26 @@ float u2,i2,p2,e2;
         m_page0[m_page_count0++] = p1;
       }
    }
+   if(DN == 1)kWhDayUpdate();
+  // if(DN == 0)kWhNightUpdate();
+}
 
+
+void kWhDayUpdate(){
+  float kWhDay = (e1);
+  kWhDayAll = (kWhDayAllERROM + kWhDay) / 1000;
+}
+
+void firstRun(byte DD){
+  
+  if(DD > 1){
+    jsonWrite(configSetup, "DN", 1);
+    jsonWrite(configSetup, "dAdresse", 0);
+    jsonWrite(configSetup, "nAdresse", 0);
+    jsonWrite(configSetup, "TarrifAdresseD", 0);
+    jsonWrite(configSetup, "TarrifAdresseN", 0);
+    DN = 1;
+    
+  }
+  
 }

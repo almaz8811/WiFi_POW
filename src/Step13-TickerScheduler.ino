@@ -23,15 +23,18 @@ void setup()
   display.setCursor(5, 10);
   display.print("AlmazPoWer v1.0");
   //display.fillRect(0, 27, 320, 80, ILI9341_YELLOW);  
-  display.drawRect(0, 27, 159, 20, ILI9341_WHITE);  
-  display.drawRect(160, 27, 159, 20, ILI9341_WHITE);  
-  display.drawRect(0, 47, 159, 20, ILI9341_WHITE);  
-  display.drawRect(160, 47, 159, 20, ILI9341_WHITE);
-  
-  display.drawRect(0, 67, 159, 20, ILI9341_WHITE);
-  display.fillRect(1, 68, 157, 18, ILI9341_YELLOW);
-  display.drawRect(160, 67, 159, 20, ILI9341_WHITE);
-  display.fillRect(161, 68, 157, 18, ILI9341_YELLOW);
+  display.drawRect(0, 27, 159, 16, ILI9341_WHITE);  
+  display.drawRect(160, 27, 159, 16, ILI9341_WHITE);  
+  display.drawRect(0, 43, 159, 16, ILI9341_WHITE);  
+  display.drawRect(160, 43, 159, 16, ILI9341_WHITE);  
+  display.drawRect(0, 59, 159, 16, ILI9341_WHITE);
+  display.drawRect(160, 59, 159, 16, ILI9341_WHITE);
+  display.drawRect(0, 75, 159, 16, ILI9341_WHITE);
+  display.drawRect(160, 75, 159, 16, ILI9341_WHITE);
+  display.drawRect(0, 91, 159, 16, ILI9341_WHITE);
+  display.drawRect(160, 91, 159, 16, ILI9341_WHITE);
+  display.drawRect(0, 107, 159, 16, ILI9341_WHITE);
+  display.drawRect(160, 107, 159, 16, ILI9341_WHITE);
   display.endWrite();
   //Запускаем WIFI
   WIFIinit();
@@ -49,7 +52,14 @@ void setup()
     // Запуск модуля измерения ЭЭ
 
   PZEM_init();
-  //DHT_init();
+
+  DN = jsonRead(configSetup, "DN").toInt();
+  firstRun(DN);
+  String kWhDayAllERROMst = jsonRead(configSetup, "kWhDayAllERROM");
+  char kWhDayAllERROMch[10];
+  kWhDayAllERROMst.toCharArray(kWhDayAllERROMch, kWhDayAllERROMst.length());
+  kWhDayAllERROM = atof(kWhDayAllERROMch); //считаем  из памяти количество Вт за день */
+  kWhDayUpdate();  
 }
 
 void loop()

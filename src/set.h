@@ -15,7 +15,7 @@
 #include <Adafruit_STMPE610.h>
 #include "Fonts/FreeMono7pt8b.h"
 #include "Fonts/FreeMono9pt8b.h"
-//#include "Fonts/FreeMonoBold7pt8b.h"
+#include "Fonts/FreeMonoBold9pt8b.h"
 #include "Fonts/FreeMonoBold12pt8b.h"
 
 // Объект для обнавления с web страницы
@@ -50,6 +50,7 @@ Adafruit_ILI9341 display = Adafruit_ILI9341(PIN_CS, PIN_DC, PIN_RESET);
 String configSetup = "{}"; // данные для config.setup.json
 String configJson = "{}";  // данные для config.live.json
 
+
 char s[100];
 char m_file[16];
 int u_count = 0, i_count = 0, p_count = 0;
@@ -64,3 +65,12 @@ uint32_t t_cur = 0;
 uint32_t ms, ms1 = 0, ms2 = 0, ms3 = 0, ms4 = 0, ms_ok = 0;
 uint32_t m_tm = 10000;
 uint16_t m_count = 0;
+
+byte DN; // параметр День1, ночь0
+byte DNAdresse = 0; //Адрес для хранения параметра День1, ночь0
+byte dAdresse = 1; // начала адресса куда буду писать показаня за день там тип данных int32_t 4 байта занимает
+byte nAdresse = 5; // начала адресса куда буду писать показаня за ночь там тип данных int32_t 4 байта занимает
+byte TarrifAdresseD = 9; // начала адресса куда буду писать время перехода на день
+byte TarrifAdresseN = 11; // начала адресса куда буду писать время перехода на ночь
+float kWhDayAll;
+float kWhDayAllERROM;
