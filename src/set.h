@@ -6,6 +6,7 @@
 #include <ESP8266HTTPUpdateServer.h>
 #include <DNSServer.h>
 #include <TickerScheduler.h> // https://github.com/Toshik/TickerScheduler
+#include <time.h>
 // Библиотеки устройств
 #include <DHT.h> // https://github.com/markruys/arduino-DHT
 #include <PZEM004T.h>
@@ -67,10 +68,12 @@ uint32_t m_tm = 10000;
 uint16_t m_count = 0;
 
 byte DN; // параметр День1, ночь0
-byte DNAdresse = 0; //Адрес для хранения параметра День1, ночь0
-byte dAdresse = 1; // начала адресса куда буду писать показаня за день там тип данных int32_t 4 байта занимает
-byte nAdresse = 5; // начала адресса куда буду писать показаня за ночь там тип данных int32_t 4 байта занимает
+byte DNAdresse = 0; //! Адрес для хранения параметра День1, ночь0
+byte dAdresse = 1; // *начала адресса куда буду писать показаня за день там тип данных int32_t 4 байта занимает
+byte nAdresse = 5; // ?начала адресса куда буду писать показаня за ночь там тип данных int32_t 4 байта занимает
 byte TarrifAdresseD = 9; // начала адресса куда буду писать время перехода на день
 byte TarrifAdresseN = 11; // начала адресса куда буду писать время перехода на ночь
+int TimeD = 7;  // время перехода на день
+int TimeN = 23;  // время перехода на ночь
 float kWhDayAll;
 float kWhDayAllERROM;
