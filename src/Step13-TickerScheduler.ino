@@ -55,10 +55,9 @@ void setup()
 
   DN = jsonRead(configSetup, "DN").toInt();
   firstRun(DN);
-  String kWhDayAllERROMst = jsonRead(configSetup, "kWhDayAllERROM");
-  char kWhDayAllERROMch[10];
-  kWhDayAllERROMst.toCharArray(kWhDayAllERROMch, kWhDayAllERROMst.length());
-  kWhDayAllERROM = atof(kWhDayAllERROMch); //считаем  из памяти количество Вт за день */
+  kWhDayAllERROM = jsonReadtoFloat(configSetup, "kWhDayAllERROM");  //считаем  из памяти количество Вт за дни
+  kWhNightAllERROM = jsonReadtoFloat(configSetup, "kWhNightAllERROM");
+  kWhNightUpdate(); // разовая сработка при запуске. Чтобы считаные из памяти показания засчитались. А то если день, то ночные не считались и наоборот
   kWhDayUpdate();  
 }
 

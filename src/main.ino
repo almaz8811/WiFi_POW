@@ -14,6 +14,17 @@ int jsonReadtoInt(String &json, String name)
   return root[name];
 }
 
+// ------------- Чтение значения json
+float jsonReadtoFloat(String &json, String name)
+{
+  DynamicJsonBuffer jsonBuffer;
+  JsonObject &root = jsonBuffer.parseObject(json);
+  char tempChar[50];
+  String tempString = root[name].as<String>();
+  tempString.toCharArray(tempChar, tempString.length());
+  return atof(tempChar);
+}
+
 // ------------- Запись значения json String
 String jsonWrite(String &json, String name, String volume)
 {
@@ -344,6 +355,44 @@ void displayGRAPH()
   display.endWrite();
 }
 
+/* void stringToFloat(string s){ 
+  char ch[10];
+  s.toCharArray(ch, s.length());
+  return atof(ch);
+} */
+
+void MomentCost(){
+  float tarifM;
+  if(DN == 1) {tarifM = tarifD;} else {tarifM = tarifN;}
+  float cost = (p1 / 1000) * tarifM;
+  jsonWrite(configJson, "momentCost", cost);
+}
+
+void kWhDayUpdate(){
+  uint32_t kWhDay = e1;
+  kWhDayAll = kWhDayAllERROM + kWhDay;
+  jsonWrite(configJson, "kWhDayAll", kWhDayAll / 1000);
+}
+
+void kWhNightUpdate(){
+  uint32_t kWhNight = e1;
+  kWhNightAll = kWhNightAllERROM + kWhNight;
+  jsonWrite(configJson, "kWhNightAll", kWhNightAll / 1000);
+}
+
+void kWh_All(){
+  kWhAll = kWhNightAll + kWhDayAll;
+  jsonWrite(configJson, "kWhAll", kWhAll / 1000);
+}
+
+void Money(){
+  float mnight = kWhNightAll * tarifN / 1000;
+  float mday = kWhDayAll * tarifD / 1000;
+  jsonWrite(configJson, "mnight", mnight);
+  jsonWrite(configJson, "mday", mday);
+  jsonWrite(configJson, "mDayAll", mnight + mday);
+}
+
 void readEnergy()
 {
   ms = millis();
@@ -436,15 +485,9 @@ void readEnergy()
       m_page0[m_page_count0++] = p1;
     }
   }
-  if (DN == 1)
-    kWhDayUpdate();
+  if (DN == 1){
+    //kWhDayUpdate();
   // if(DN == 0)kWhNightUpdate();
-}
-
-void kWhDayUpdate()
-{
-  float kWhDay = (e1);
-  kWhDayAll = (kWhDayAllERROM + kWhDay) / 1000;
 }
 
 void firstRun(byte DD)

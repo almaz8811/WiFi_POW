@@ -9,6 +9,7 @@ void PZEM_init()
         jsonWrite(configJson, "current", i1); // отправить температуру в configJson
         jsonWrite(configJson, "power", p1); // отправить температуру в configJson
         jsonWrite(configJson, "energy", e1); // отправить температуру в configJson
+        
         displayEE();
         displayGRAPH();
       },

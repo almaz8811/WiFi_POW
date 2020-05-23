@@ -75,5 +75,10 @@ byte TarrifAdresseD = 9; // начала адресса куда буду пис
 byte TarrifAdresseN = 11; // начала адресса куда буду писать время перехода на ночь
 int TimeD = 7;  // время перехода на день
 int TimeN = 23;  // время перехода на ночь
+float kWhAll;
 float kWhDayAll;
+float kWhNightAll;
 float kWhDayAllERROM;
+float kWhNightAllERROM;
+float tarifD; // цена на дневное ЭЭ введённая на телефоне
+float tarifN; // цена на ночное ЭЭ введённая на телефоне
