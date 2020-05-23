@@ -393,6 +393,36 @@ void Money(){
   jsonWrite(configJson, "mDayAll", mnight + mday);
 }
 
+void NightToDay()
+{
+  if ((TimeN > hour() && hour() >= TimeD) && DN == 0)
+  {
+    DN = 1;
+    //memset(vipe, 0,sizeof(vipe)); // заполняем нулями при переходе. Так как функция подсчёта находится ниже и при смене DN посчитает день за ночь и наоборот
+    kWhNightAllERROM = kWhNightAll;
+    jsonWrite(configJson, "kWhNightAll", kWhNightAll / 1000);
+    jsonWrite(configJson, "DN", DN);
+    //Serial.println("Go to day time");
+    ResetWh = 1;
+    LstRdWh = millis();
+  }
+}
+
+void DayToNight()
+{
+  if ((TimeN <= hour() || hour() < TimeD) && DN == 1)
+  {
+    //Blynk.virtualWrite(22,float(kWhDayAll)/1000);
+    DN = 0;
+    jsonWrite(configJson, "kWhDayAll", kWhDayAll / 1000);
+    kWhDayAllERROM = kWhDayAll;
+    jsonWrite(configJson, "DN", DN);
+    //Serial.println("Go to night time");
+    ResetWh = 1;
+    LstRdWh = millis();
+  }
+}
+
 void readEnergy()
 {
   ms = millis();
@@ -504,7 +534,7 @@ void firstRun(byte DD)
   }
 }
 
-void NightToDay(){
+/* void NightToDay(){
   if((TimeN>hour() && hour()>=TimeD) && DN == 0){
   DN = 1;
   memset(vipe, 0,sizeof(vipe)); // заполняем нулями при переходе. Так как функция подсчёта находится ниже и при смене DN посчитает день за ночь и наоборот
@@ -540,4 +570,4 @@ void DayToNight(){
       //Serial.println("---------------------------");
   } 
   
-}
+} */
