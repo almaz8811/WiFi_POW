@@ -250,7 +250,7 @@ void displayEE()
 
   display.fillRect(1, 60, 157, 14, ILI9341_BLACK);
   display.setFont(&FreeMonoBold9pt8b);
-  sprintf(s, "%d.%02d", (int)kWhDayAll, ((int)(kWhDayAll * 100)) % 100);
+  sprintf(s, "%d.%02d", (int)(kWhDayAll + kWhNightAll), ((int)((kWhDayAll + kWhNightAll) * 100)) % 100);
   display.setCursor(2, 72);
   display.print(s);
   display.setFont(&FreeMono7pt8b);
@@ -258,25 +258,25 @@ void displayEE()
 
   display.fillRect(161, 60, 157, 14, ILI9341_BLACK);
   display.setFont(&FreeMonoBold9pt8b);
-  sprintf(s, "%d.%02d", (int)e1, ((int)(e1 * 100)) % 100);
+  sprintf(s, "%d.%02d", (int)kWhAll, ((int)(kWhAll * 100)) % 100);
   display.setCursor(162, 72);
-  display.print("999.00");
+  display.print(s);
   display.setFont(&FreeMono7pt8b);
   display.print(" кВт/м");
 
   display.fillRect(1, 76, 157, 14, ILI9341_BLACK);
   display.setFont(&FreeMonoBold9pt8b);
-  sprintf(s, "%d.%02d", (int)p1, ((int)(p1 * 100)) % 100);
+  sprintf(s, "%d.%02d", (int)(mnight + mday), ((int)((mnight + mday) * 100)) % 100);
   display.setCursor(2, 88);
-  display.print("9999.00");
+  display.print(s);
   display.setFont(&FreeMono7pt8b);
   display.print(" цена/д");
 
   display.fillRect(161, 76, 157, 14, ILI9341_BLACK);
   display.setFont(&FreeMonoBold9pt8b);
-  sprintf(s, "%d.%02d", (int)e1, ((int)(e1 * 100)) % 100);
+  sprintf(s, "%d.%02d", (int)mall, ((int)(mall * 100)) % 100);
   display.setCursor(162, 88);
-  display.print("9999.00");
+  display.print(s);
   display.setFont(&FreeMono7pt8b);
   display.print(" цена/м");
 
@@ -386,8 +386,9 @@ void kWh_All(){
 }
 
 void Money(){
-  float mnight = kWhNightAll * tarifN / 1000;
-  float mday = kWhDayAll * tarifD / 1000;
+  mnight = kWhNightAll * tarifN / 1000;
+  mday = kWhDayAll * tarifD / 1000;
+  mall = kWhAll * tarifD / 1000;
   jsonWrite(configJson, "mnight", mnight);
   jsonWrite(configJson, "mday", mday);
   jsonWrite(configJson, "mDayAll", mnight + mday);
@@ -399,6 +400,7 @@ void NightToDay()
   {
     DN = 1;
     //memset(vipe, 0,sizeof(vipe)); // заполняем нулями при переходе. Так как функция подсчёта находится ниже и при смене DN посчитает день за ночь и наоборот
+    kWhNightAll = 0;
     kWhNightAllERROM = kWhNightAll;
     jsonWrite(configJson, "kWhNightAll", kWhNightAll / 1000);
     jsonWrite(configJson, "DN", DN);
@@ -414,8 +416,9 @@ void DayToNight()
   {
     //Blynk.virtualWrite(22,float(kWhDayAll)/1000);
     DN = 0;
-    jsonWrite(configJson, "kWhDayAll", kWhDayAll / 1000);
+    kWhDayAll = 0;
     kWhDayAllERROM = kWhDayAll;
+    jsonWrite(configJson, "kWhDayAll", kWhDayAll / 1000);
     jsonWrite(configJson, "DN", DN);
     //Serial.println("Go to night time");
     ResetWh = 1;
@@ -515,9 +518,13 @@ void readEnergy()
       m_page0[m_page_count0++] = p1;
     }
   }
-  if (DN == 1){
-    //kWhDayUpdate();
-  // if(DN == 0)kWhNightUpdate();
+  MomentCost(); // ткнём пока сюда
+  DayToNight();
+  NightToDay();
+  Money();
+  if (DN == 1) kWhDayUpdate();
+  if (DN == 0) kWhNightUpdate();
+  kWh_All();
 }
 
 void firstRun(byte DD)

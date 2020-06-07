@@ -59,6 +59,7 @@ void setup()
   kWhNightAllERROM = jsonReadtoFloat(configSetup, "kWhNightAllERROM");
   kWhNightUpdate(); // разовая сработка при запуске. Чтобы считаные из памяти показания засчитались. А то если день, то ночные не считались и наоборот
   kWhDayUpdate();  
+
 }
 
 void loop()

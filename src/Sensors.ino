@@ -65,7 +65,7 @@ void sec_init()
 void disp_time()
 {
   ts.add(
-      2, 60000, [&](void *) { // Запустим задачу 2 с интервалом 60000ms
+      2, 300000, [&](void *) { // Запустим задачу 2 с интервалом 60000ms
         display.startWrite();
         display.setFont(&FreeMonoBold12pt8b);
         display.setTextColor(ILI9341_GREEN);
@@ -73,7 +73,6 @@ void disp_time()
         display.setCursor(248, 17);
         display.print(GetTimeHM());
         display.endWrite();
-
       },
       nullptr, true);
 }

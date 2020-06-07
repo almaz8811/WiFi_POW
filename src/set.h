@@ -14,6 +14,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_ILI9341.h>
 #include <Adafruit_STMPE610.h>
+#include <SoftwareSerial.h>
 #include "Fonts/FreeMono7pt8b.h"
 #include "Fonts/FreeMono9pt8b.h"
 #include "Fonts/FreeMonoBold9pt8b.h"
@@ -30,7 +31,8 @@ DNSServer dnsServer;
 //Планировщик задач (Число задач)
 TickerScheduler ts(3);
 
-PZEM004T pzem(&Serial);
+//PZEM004T pzem(&Serial);
+PZEM004T pzem(4, 5);
 IPAddress ip(192, 168, 1, 1);
 
 // Датчик DHT
@@ -38,8 +40,8 @@ DHT dht;
 #define dhtPin 2
 
 // Дисплей
-#define PIN_DC 4
-#define PIN_RESET 5
+#define PIN_DC 16
+#define PIN_RESET 12
 #define PIN_CS 15
 
 #define M_PAGE_SIZE 150
@@ -81,6 +83,9 @@ float kWhDayAll;
 float kWhNightAll;
 float kWhDayAllERROM;
 float kWhNightAllERROM;
-float tarifD; // цена на дневное ЭЭ введённая на телефоне
-float tarifN; // цена на ночное ЭЭ введённая на телефоне
+float tarifD = 4.88; // цена на дневное ЭЭ введённая на телефоне
+float tarifN = 4.88; // цена на ночное ЭЭ введённая на телефоне
+float mnight;
+float mday;
+float mall;
 unsigned long LstRdWh = 0; // счётчик времени для функции сброса.
